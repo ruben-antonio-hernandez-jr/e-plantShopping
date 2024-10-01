@@ -12,7 +12,7 @@ function ProductList() {
     const cart = useSelector(state => state.cart.items);
 
     const itemInCart = (item) => {
-        
+        return cart.find(plant => plant.name === item.name);
     };
 
     const getCartCount = () => {
@@ -311,7 +311,11 @@ function ProductList() {
                                 <div className='product-title'>{plant.name}</div>
                                 <div className='product-description'>{plant.description}</div>
                                 <div className='product-price'>{plant.cost}</div>
+                                {!itemInCart(plant)? (
                                 <button className='product-button' onClick={(e) => handleAddToCart(plant, e)}>Add to Cart</button>
+                                ) : (
+                                <button className='product-button added-to-cart' disabled>Added To Cart</button>
+                                )}
                             </div>
                         ))}
                     </div>
